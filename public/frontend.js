@@ -9,7 +9,7 @@ const bar = document.querySelector('.bar');
 const barContainer = document.querySelector('.slider');
 const sliderBtn = document.querySelector('.slider-btn');
 // GLOBAL VARIABLES
-const VIDEO_SRC = 'https://files.fm/down.php?i=j2b49r5vq';
+const VIDEO_SRC = 'https://files.fm/embed/playerv2?hash=j2b49r5vq&w=100%&h=auto';
 const ADMINPIN = '555';
 let isFullScreen = false;
 let username;
