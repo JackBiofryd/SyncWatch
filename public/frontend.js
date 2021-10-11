@@ -1,6 +1,7 @@
 // APP VARIABLES
 const socket = io();
 const video = document.querySelector('video');
+const source = document.querySelector('.source');
 const pBtn = document.querySelector('#play-pause');
 const forwBtn = document.querySelector('#forward');
 const backwBtn = document.querySelector('#backward');
@@ -159,7 +160,7 @@ function handleJoin() {
 	isAdmin ? socket.emit('AdminHasJoined') : removeUnecesarryBtns();
 
 	document.querySelector('.overlay').style.display = 'none';
-	video.src = VIDEO_SRC;
+	source.src = VIDEO_SRC;
 
 	initChat();
 	// Request current synced time from server
