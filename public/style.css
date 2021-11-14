@@ -86,6 +86,8 @@ body {
 .video-container {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	position: relative;
 	margin: 2rem;
 	max-width: 70%;
@@ -109,7 +111,6 @@ body {
 	opacity: 0;
 }
 
-.video-container video:hover + .controls,
 .video-container .controls:hover {
 	opacity: 1;
 }
@@ -204,7 +205,6 @@ body {
 .messages-container {
 	height: 80%;
 	overflow-y: auto;
-	max-width: 100%;
 	overflow-x: hidden;
 	word-wrap: break-word;
 }
@@ -222,11 +222,20 @@ body {
 .message-container.sender {
 	text-align: right;
 	margin-right: 0.5rem;
+	color: cyan;
 }
 
 .message-container .message-username {
 	color: #ddd;
 	margin-bottom: 0.2rem;
+}
+
+.server-message {
+	font-size: 1.5rem;
+	font-style: italic;
+	color: #ff0000;
+	opacity: 0.7;
+	text-align: center;
 }
 
 /* MEDIA QUERIES */
