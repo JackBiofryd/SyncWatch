@@ -1,7 +1,6 @@
 // APP VARIABLES
 const socket = io();
 const video = document.querySelector('video');
-const source = document.querySelector('.source');
 const pBtn = document.querySelector('#play-pause');
 const forwBtn = document.querySelector('#forward');
 const backwBtn = document.querySelector('#backward');
@@ -10,7 +9,9 @@ const bar = document.querySelector('.bar');
 const barContainer = document.querySelector('.slider');
 const sliderBtn = document.querySelector('.slider-btn');
 // GLOBAL VARIABLES
-const VIDEO_SRC = 'https://icecube-eu-828.icedrive.io/download?p=PaqRmXXff%2BXRHcZsctF2vHwC8eBYzPZKVC%2FFpJ8lWJVgvX8dhrCoQhU4pZ7OOrXWKLvAuymEjA4zSMkJTpBzapaQXuKBV9ijXIhYjxbpOaxJGo1xYphzg5on7i5ugBXUq8dCS5iWRCLCV0ceW0gQKIaucMLcDlhQPZNgn7cSNbYaCbkPVXCqG5Such9LYnjnO0aEkhTOsPy7kT9xv6kJYg%3D%3D';
+const VIDEO_SRC =
+	'https://icecube-eu-407.icedrive.io/download?p=cj0Nt4ZZlJypKcGe6dGd%2FKrfWnVtDrkW58vFSNZhYtxYFCOMip0mZYJ0zFt%2BFDN%2FbR8Lzyx%2F9xTkZZSmd7VtOayyeSjL41JSLMqSaN0XMOEn%2BR8XxQ9qjjE1nxld%2FeVpHXhaMVC%2BKdWfXCm1VCUf9D64NNt8jHM3o8txvMpHYwMw%2F%2BXT8Udy54VRwyRmz0rbAiHEQipX3IlsVck1p4qDQXKYMdxfSE8UfHAXMPgACxo%3D';
+      // 'https://icecube-eu-308.icedrive.io/download?p=kc3xXWFiEQ4C%2FkkobqK%2Brioh2fUdrXAACye3eIuK%2Fhr%2F%2BQCcxwpj3wbAw7U0EQ7vTLGkaea1J3G8NB7XL%2Bu0k0BoEZou37rULmgy5chA%2FvO2uM8eg2t%2Fwae8%2FGJB9sFLw0xSfzs%2F4bkuJvfRrWokcFTZ%2Bf1Pxv%2F5QHSFxDuAfoDQgIUyRQPsRvGoPSg6vEFUc%2Ba4bAB5ihkS1m10saj0kQXjhVfHfL9LlRK7O0pyDgBYMCPZ2fkxD5nt5SQSW%2F6CttBhNZYBb53jeK3sXZhU91NAWRzHuzju%2BGRxsqajGhM%3D';
 const ADMINPIN = '555';
 let isFullScreen = false;
 let username;
@@ -67,13 +68,20 @@ function handleTimeChange() {
 		pBtn.classList.add('fa-play');
 	}
 
-	// Calculate minutes and seconds and set in time value container in UI
-	let minutes = String(Math.floor((video.currentTime / 60) % 10));
-	let seconds = String(Math.floor(video.currentTime % 60));
-	if (minutes.length == 1) minutes = '0' + minutes;
-	if (seconds.length == 1) seconds = '0' + seconds;
+	let time = video.currentTime;
 
-	document.querySelector('.time').innerHTML = `${minutes}:${seconds}`;
+	// Calculate minutes and seconds and set in time value container in UI
+	let hours = ~~(time / 3600);
+	let minutes = ~~((time % 3600) / 60);
+	let seconds = ~~time % 60;
+
+	if (String(hours).length == 1) hours = '0' + hours;
+	if (String(minutes).length == 1) minutes = '0' + minutes;
+	if (String(seconds).length == 1) seconds = '0' + seconds;
+
+	document.querySelector(
+		'.time'
+	).innerHTML = `${hours}:${minutes}:${seconds}`;
 
 	// Move slider button because time changed
 	changeSliderBtnPos();
@@ -264,15 +272,13 @@ function outputMessage(messageInfo) {
 	const messagesContainer = document.querySelector('.messages-container');
 	const div = document.createElement('div');
 
+	messagesContainer.scrollTop = messagesContainer.scrollHeight;
 	div.classList.add('message-container', 'my-XS');
 	messageInfo.username === username && div.classList.add('sender');
-	div.innerHTML = `
-			<small class="message-username">${messageInfo.username}</small>
+	div.innerHTML = `<small class="message-username">${messageInfo.username}</small>
 			<p class="message">${messageInfo.message}</p>`;
 
 	messagesContainer.appendChild(div);
-
-	messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
 function getMsgsFromServerAndDisplay() {
@@ -282,3 +288,16 @@ function getMsgsFromServerAndDisplay() {
 socket.on('recieveMessages', messages =>
 	messages.forEach(msg => outputMessage(msg))
 );
+
+socket.on('UserJoined', message => OutputServerMessage(message));
+
+function OutputServerMessage(msg) {
+	const messagesContainer = document.querySelector('.messages-container');
+	const div = document.createElement('div');
+
+	messagesContainer.scrollTop = messagesContainer.scrollHeight;
+	div.classList.add('message-container', 'my-XS');
+	div.innerHTML = `<p class="message server-message">${msg}</p>`;
+
+	messagesContainer.appendChild(div);
+}
