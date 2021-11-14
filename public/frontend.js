@@ -160,7 +160,7 @@ function handleJoin() {
 	isAdmin ? socket.emit('AdminHasJoined') : removeUnecesarryBtns();
 
 	document.querySelector('.overlay').style.display = 'none';
-	source.src = VIDEO_SRC;
+	video.src = VIDEO_SRC;
 
 	initChat();
 	// Request current synced time from server
