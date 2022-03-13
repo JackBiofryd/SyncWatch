@@ -10,7 +10,7 @@ const barContainer = document.querySelector('.slider');
 const sliderBtn = document.querySelector('.slider-btn');
 // GLOBAL VARIABLES
 const VIDEO_SRC =
-	'https://icecube-eu-400.icedrive.io/download?p=%2BYEnzCHIq0EBJvNqHCOEIpulPAeII3nmHYnTv8v4BIyL8p56ynKlCjcjdazwot%2FmCL4gZ1vcWrbV%2BV6NTh2dMlZx%2FWmr0mkvEnDADMfFu1J9NsgEla7ARHomfIjZCAQb5QNW%2FmwKJfjw0mGp9GHHH3w1%2B6fLhEC5cPpFLoQmmLX3XISF325fTA%2FR4LD%2FTP%2BoDh9qmzK89BP9COquvSWT2okO1qAvWQBVtkBmV7ef6HqVcje1k42shqwnz%2FGJAfDG';
+	'https://icecube-eu-408.icedrive.io/download?p=Hki4Egik.7XNHYPbtu3_IuRoyAHzphhdKkEVzScDeXOuHQi25ytAJBBUgDLFNVWELBEYjGnVA5SrLJzjvW9exkZmvlbr4LohuKjJQSLqTpP8XdXVogm8HjiseXfeDZIGNjTsBOfm_uYZSIHksjvjQ5HaLqQI6DlpXzlrE3HiDvcTkOz51XmvMKrz2WsrGZvIfdokQRU_HUDn0M4IXtQGGA--';
 const ADMINPIN = '555';
 let isFullScreen = false;
 let username;
